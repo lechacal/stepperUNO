@@ -5,9 +5,11 @@ lechacal.com
 
 Arduino library to use with stepperUNO.
 
+http://lechacal.com//wiki/index.php?title=Stepper_UNO_v1.0
+
 Manually control up to 2 stepper motors using a lcd-keypad shield.
 
-See example folder for some plain use example.
+See example folder for some plain usage examples.
 
 # Installation
 
