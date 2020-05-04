@@ -33,9 +33,9 @@ long goto_Position;
 long timer1 = 0;
 
 const byte MODE_DISABLE = 0;
-const byte MODE_RUN = 1;
+const byte MODE_MANU = 1;
 const byte MODE_STORE = 2;
-const byte MODE_RECALL = 3;
+const byte MODE_CALL = 3;
 const byte MODE_AUTO = 4;
 
 long P[32];                 // array storing position being stored
@@ -78,22 +78,19 @@ void loop() {
     switch (button) {
 
       case BUTTON_RIGHT: {
-          switch (MODE) {
-            case MODE_RUN: {
-                motor1.setDirection(true);
-                motor2.setDirection(true);
-                break;
-              }//end case
+          if (MODE == MODE_MANU or MODE == MODE_STORE or MODE == MODE_CALL) {
+
+            motor1.setDirection(true);
+            motor2.setDirection(true);
+
           }
           break;
         }
       case BUTTON_LEFT: {
-          switch (MODE) {
-            case MODE_RUN: {
-                motor1.setDirection(false);
-                motor2.setDirection(false);
-                break;
-              }//end case
+          if (MODE == MODE_MANU or MODE == MODE_STORE or MODE == MODE_CALL) {
+
+            motor1.setDirection(false);
+            motor2.setDirection(false);
 
           }
           break;
@@ -151,7 +148,7 @@ void loop() {
           update_lcd();
           break;
         }
-      case MODE_RECALL: {
+      case MODE_CALL: {
           do_recall(P[P_IDX]);
           break;
         }
@@ -170,7 +167,7 @@ void loop() {
 
 
 
-  if (MODE == MODE_RUN) {
+  if (MODE == MODE_MANU or MODE == MODE_STORE or MODE == MODE_CALL) {
     switch (button) {
       case BUTTON_RIGHT: {
           if (millis() > timer1 + step_delay) {
@@ -197,7 +194,7 @@ void loop() {
           break;
         }
     } //END switch button
-  }//end if MODE_RUN
+  }//end if MODE_MANU
 
   else if (MODE == MODE_AUTO) {
 
@@ -215,7 +212,7 @@ void loop() {
 
     }//end if
     else {
-      MODE = MODE_RECALL;
+      MODE = MODE_CALL;
       update_lcd();
     }
   }//end if MODE_AUTO
@@ -232,7 +229,7 @@ void update_lcd() {
         lcd.print("DIS ");
         break;
       }
-    case MODE_RUN: {
+    case MODE_MANU: {
         lcd.print("MANU");
         break;
       }
@@ -240,7 +237,7 @@ void update_lcd() {
         lcd.print("STO ");
         break;
       }
-    case MODE_RECALL: {
+    case MODE_CALL: {
         lcd.print("CALL");
         break;
       }
