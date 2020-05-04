@@ -2,13 +2,11 @@
 // lechacal.com
 // Example usage of stepperUNO library
 //
-// Position Control of both motors
+// Position Control for both motors at the same time
 // Ability to store and recall positions in memory
 //
-//
-//Select button is used to switch more
-//Left button runs left and store recall on position A.
-//Right button runs right and store recall on position B.
+// The operational mode is explained in the link below.
+// http://lechacal.com//wiki/index.php?title=Position_Control_with_StepperUNO#Operation_Modes
 
 // Required libraries:
 //
